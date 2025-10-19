@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  web:
+    build: ..
+    command: gunicorn qro_project.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ..:/app:rw
+      - static_volume:/app/staticfiles
+    ports:
+      - '8000:8000'
+    environment:
+      - DEBUG=1
+    depends_on:
+      - db
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: quickbite
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+  static_volume:

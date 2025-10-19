@@ -1,4 +1,17 @@
 [build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quickbiteqr"
+version = "0.1.0"
+description = "QuickBiteQR - Django MVP for QR-based restaurant ordering"
+authors = [ { name = "QuickBiteQR" } ]
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 88
+[build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 

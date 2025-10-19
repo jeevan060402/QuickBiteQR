@@ -1,0 +1,17 @@
+name: Release
+on:
+  workflow_dispatch:
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read version and create tag
+        id: ver
+        run: echo "VERSION=$(cat VERSION)" >> $GITHUB_OUTPUT
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.ver.outputs.VERSION }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,3 +1,12 @@
+from pathlib import Path
+
+__all__ = ['version']
+
+VERSION_FILE = Path(__file__).resolve().parent.parent / 'VERSION'
+try:
+    version = VERSION_FILE.read_text().strip()
+except Exception:
+    version = '0.0.0'
 # qro_project package
 from pathlib import Path
 

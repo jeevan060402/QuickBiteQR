@@ -1,0 +1,37 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: quickbite
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready --health-interval=10s --health-timeout=5s --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run style checks
+        run: |
+          black --check .
+          isort --check-only .
+          flake8 .
+      - name: Run migrations & tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/quickbite
+        run: |
+          python manage.py migrate --noinput
+          python manage.py test
