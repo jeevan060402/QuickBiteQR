@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quickbiteqr"
+version = "0.1.0"
+description = "QuickBiteQR - Django MVP for QR-based restaurant ordering"
+authors = [ { name = "QuickBiteQR" } ]
+requires-python = ">=3.10"
+
+[tool.black]
+line-length = 88
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quickbiteqr"
+version = "0.1.0"
+description = "Scan-to-order platform for tables using QR codes"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "Django>=4.2",
+  "djangorestframework",
+  "Pillow",
+  "qrcode",
+  "psycopg2-binary",
+  "python-dotenv",
+  "dj-database-url",
+  "gunicorn",
+]
+authors = [
+  { name="QuickBiteQR", email="support@example.com" }
+]
