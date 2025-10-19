@@ -1,4 +1,8 @@
 Django>=4.2
+djangorestframework
 Pillow
 qrcode
 psycopg2-binary
+python-dotenv
+dj-database-url
+gunicorn
